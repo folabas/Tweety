@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useTheme } from "../contexts/ThemeContext";
 
-const backgroundImage = require("../assets/background.jpg");
+const backgroundImage = require("../Images/background.jpg");
 
 const WelcomeScreen = ({ navigation }) => {
   const { theme } = useTheme();

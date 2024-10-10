@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import * as SplashScreen from 'expo-splash-screen';
 import { FontAwesome } from '@expo/vector-icons';
+import axios from 'axios';
 
-// Keep the splash screen visible while fonts are loading
 SplashScreen.preventAutoHideAsync();
 
 const SignupScreen = ({ navigation }) => {
@@ -27,11 +27,20 @@ const SignupScreen = ({ navigation }) => {
     return null;
   }
 
-  const handleSignup = () => {
-    console.log('Full Name:', fullName);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    navigation.navigate('Login');
+  const handleSignup = async () => {
+    try {
+      const response = await axios.post('http://192.168.8.100:5000/api/auth/register', {
+        fullName,
+        email,
+        password,
+      });
+      console.log('User registered:', response.data);
+      Alert.alert('Success', 'User registered successfully');
+      navigation.navigate('Login'); // Navigate to Login screen after successful signup
+    } catch (error) {
+      console.error('Error registering user:', error.response ? error.response.data : error.message);
+      Alert.alert('Error', error.response?.data?.message || 'An error occurred during registration');
+    }
   };
 
   return (

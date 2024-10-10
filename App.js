@@ -6,6 +6,7 @@ import WelcomeScreen from "./Pages/WelcomeScreen";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import SignupScreen from "./Pages/SignUpScreen";
 import LoginScreen from "./Pages/LoginScreen";
+import Home from "./Pages/Home";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
             component={LoginScreen}
             options={{ headerShown: false }}
           />
+          <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
